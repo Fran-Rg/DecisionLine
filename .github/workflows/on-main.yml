@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   static:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v4

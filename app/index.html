@@ -13,5 +13,21 @@
     <div id="root"></div>
     <script src="https://cdn.jsdelivr.net/npm/ggwave@0.4.0/ggwave.min.js"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script src="nosleep.min.js"></script>
+    <script>
+      if (/mobile/i.test(navigator.userAgent) && !location.hash) {
+        window.scrollTo(0, 1);
+      }
+  
+      var noSleep = new NoSleep();
+  
+      function enableNoSleep() {
+        console.log("No sleep enabled!");
+        noSleep.enable();
+        document.removeEventListener('touchstart', enableNoSleep, false);
+      }
+      document.addEventListener('touchstart', enableNoSleep, false);
+    </script>
+  
   </body>
 </html>

@@ -1,0 +1,85 @@
+
+.player-0 {
+    --background: #000000;
+    --color: white;
+}
+.player-1 {
+    --background: #e6194b;
+    --color: white;
+}
+.player-2 {
+    --background: #3cb44b;
+    --color: white;
+}
+.player-3 {
+    --background: #ffe119;
+    --color: black;
+}
+.player-4 {
+    --background: #4363d8;
+    --color: white;
+}
+.player-5 {
+    --background: #f58231;
+    --color: white;
+}
+.player-6 {
+    --background: #911eb4;
+    --color: white;
+}
+.player-7 {
+    --background: #42d4f4;
+    --color: black;
+}
+.player-8 {
+    --background: #f032e6;
+    --color: white;
+}
+.player-9 {
+    --background: #bcf60c;
+    --color: black;
+}
+.player-10 {
+    --background: #fabebe;
+    --color: black;
+}
+.player-11 {
+    --background: #008080;
+    --color: white;
+}
+.player-12 {
+    --background: #e6beff;
+    --color: black;
+}
+.player-13 {
+    --background: #9a6324;
+    --color: white;
+}
+.player-14 {
+    --background: #fffac8;
+    --color: black;
+}
+.player-15 {
+    --background: #800000;
+    --color: white;
+}
+.player-16 {
+    --background: #aaffc3;
+    --color: black;
+}
+.player-17 {
+    --background: #808000;
+    --color: white;
+}
+.player-18 {
+    --background: #ffd8b1;
+    --color: black;
+}
+.player-19 {
+    --background: #000075;
+    --color: white;
+}
+.player-20 {
+    --background: #808080;
+    --color: white;
+}

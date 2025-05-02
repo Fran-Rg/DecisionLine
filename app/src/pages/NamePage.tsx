@@ -54,7 +54,7 @@ function NamePage({ onName }: NamePageProps) {
               style={{ border: "1px solid black" }}
               onIonInput={(e: any) => setName(e.target.value)}
               label="Username?"
-              placeholder="Enter your username name"
+              placeholder="Enter your username"
               value={name}
               type="text"
               autocapitalize="words"

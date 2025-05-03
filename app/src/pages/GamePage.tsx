@@ -146,7 +146,7 @@ function GamePage({ host, name }: GamePageProps) {
     return (
       <IonHeader>
         <IonToolbar className={`player-${playerNumber}`}>
-          <IonTitle style={{ '--color': 'white', 'paddingLeft': '10px', 'textAlign': 'left' }}>
+          <IonTitle style={{ 'paddingLeft': '10px', 'textAlign': 'left' }}>
             Round {roundNumber.current} - {host? "Host" : `Player ${playerNumber}`}
           </IonTitle>
           {host &&

@@ -54,8 +54,9 @@ const AudioData = {
     this.init(() => {
       if (this.instance !== null) {
         // generate audio waveform
-        var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FASTEST, 10)
-        // var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_ULTRASOUND_FASTEST, 10)
+        // var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST, 15)
+        var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FASTEST, 15)
+        // var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_ULTRASOUND_FASTEST, 15)
 
         // play audio
         var buf = convertTypedArray(waveform, Float32Array);

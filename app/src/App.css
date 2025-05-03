@@ -1,9 +1,4 @@
 .player-0 {
-    --background: #ffe119;
-    --color: black;
-}
-
-.player-x {
     --background: #000000;
     --color: white;
 }

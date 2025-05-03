@@ -258,7 +258,7 @@ const questions = [
         "a2": "At work",
     },
     {
-        "q": "Job a disneyland",
+        "q": "Job at disneyland",
         "a1": "Mascot",
         "a2": "Ride Operator",
     },
@@ -387,36 +387,216 @@ const questions = [
         "a1": "10 minutes",
         "a2": "Hour and maybe a half",
     },
-    // {
-    //     "q": "Q",
-    //     "a1": "A",
-    //     "a2": "A",
-    // },
-    // {
-    //     "q": "Q",
-    //     "a1": "A",
-    //     "a2": "A",
-    // },
-    // {
-    //     "q": "Q",
-    //     "a1": "A",
-    //     "a2": "A",
-    // },
-    // {
-    //     "q": "Q",
-    //     "a1": "A",
-    //     "a2": "A",
-    // },
-    // {
-    //     "q": "Q",
-    //     "a1": "A",
-    //     "a2": "A",
-    // },
-    // {
-    //     "q": "Q",
-    //     "a1": "A",
-    //     "a2": "A",
-    // },
+    {
+        "q": "At the end of a rainbow",
+        "a1": "Real treasure",
+        "a2": "Real unicorn",
+    },
+    {
+        "q": "When drunk",
+        "a1": "Sleepy or less active",
+        "a2": "Hyperactive",
+    },
+    {
+        "q": "Concert",
+        "a1": "At the back of a big show",
+        "a2": "At the front of a small gig",
+    },
+    {
+        "q": "New TV Series hit",
+        "a1": "Binge it",
+        "a2": "Savour it",
+    },
+    {
+        "q": "Worse to rub on your face",
+        "a1": "Sandpaper",
+        "a2": "Worms",
+    },
+    {
+        "q": "Piercing",
+        "a1": "Your tongue",
+        "a2": "Your nipple",
+    },
+    {
+        "q": "Walk barefoot on",
+        "a1": "Legos",
+        "a2": "Cow dung",
+    },
+    {
+        "q": "Get a new talent",
+        "a1": "Contortionism",
+        "a2": "imitating regional accents",
+    },
+    {
+        "q": "Whiskey",
+        "a1": "Classy",
+        "a2": "Shitty",
+    },
+    {
+        "q": "Breakup phrase",
+        "a1": "It's not you, it's me",
+        "a2": "Thinkgs were moving too quickly",
+    },
+    {
+        "q": "Shit out",
+        "a1": "1 tennis ball",
+        "a2": "1L of spicy sauce",
+    },
+    {
+        "q": "Say \"I love you\"",
+        "a1": "On the first date",
+        "a2": "Never!",
+    },
+    {
+        "q": "Year off",
+        "a1": "Travel very far",
+        "a2": "Travel around",
+    },
+    {
+        "q": "Being President",
+        "a1": "Can do",
+        "a2": "Impossible",
+    },
+    {
+        "q": "Eyebrows for the rest of your life",
+        "a1": "Unibrow",
+        "a2": "Completely shaved",
+    },
+    {
+        "q": "Year end exam",
+        "a1": "Minimum to pass",
+        "a2": "S grade",
+    },
+    {
+        "q": "End all your sentences with",
+        "a1": "You know",
+        "a2": "Bitch",
+    },
+    {
+        "q": "Most sensitive topic",
+        "a1": "Politics",
+        "a2": "Money",
+    },
+    {
+        "q": "Sex slave to",
+        "a1": "Person to your left",
+        "a2": "Person to your right",
+    },
+    {
+        "q": "Fight against",
+        "a1": "A tiger",
+        "a2": "A shark",
+    },
+    {
+        "q": "Watching a game",
+        "a1": "With commercials every 2 minutes",
+        "a2": "In slow motion",
+    },
+    {
+        "q": "Videogames",
+        "a1": "PC",
+        "a2": "Console",
+    },
+    {
+        "q": "Win",
+        "a1": "Oscar",
+        "a2": "Nobel prize",
+    },
+    {
+        "q": "When you run",
+        "a1": "Look so athletic",
+        "a2": "Look so sad",
+    },
+    {
+        "q": "Pee in the shower",
+        "a1": "More water",
+        "a2": "I have standards",
+    },
+    {
+        "q": "Trust to watch your kids",
+        "a1": "Person to your left",
+        "a2": "Person to your right",
+    },
+    {
+        "q": "Fetish",
+        "a1": "Feet",
+        "a2": "Latex",
+    },
+    {
+        "q": "Ruins pizza",
+        "a1": "Anchovies",
+        "a2": "Olives",
+    },
+    {
+        "q": "Haircut",
+        "a1": "Mohawk",
+        "a2": "Mullet",
+    },
+    {
+        "q": "Work fantasy",
+        "a1": "Plumber",
+        "a2": "Boss/secretary",
+    },
+    {
+        "q": "Break up",
+        "a1": "Stay friends",
+        "a2": "Out of my life",
+    },
+    {
+        "q": "Fart in front of your partner",
+        "a1": "After 1 week",
+        "a2": "After 5 years",
+    },
+    {
+        "q": "Choosing your order at a restaurant",
+        "a1": "Takes 20 minutes",
+        "a2": "Takes 10 seconds",
+    },
+    {
+        "q": "Toothbrush",
+        "a1": "Electric",
+        "a2": "Manual",
+    },
+    {
+        "q": "Drinking",
+        "a1": "Mix and Match",
+        "a2": "One pick for the night",
+    },
+    {
+        "q": "Already full but comes your favorite dessert",
+        "a1": "Eat and be sick",
+        "a2": "Skip",
+    },
+    {
+        "q": "Explore",
+        "a1": "The ocean depths",
+        "a2": "The edges of space",
+    },
+    {
+        "q": "Most awkward to walk in during action in dev",
+        "a1": "Your parents on you",
+        "a2": "You on your parents",
+    },
+    {
+        "q": "Worst to have a chastity belt",
+        "a1": "Every weekend forever",
+        "a2": "2 years from now",
+    },
+    {
+        "q": "Tour of",
+        "a1": "Gay clubs",
+        "a2": "Strip clubs",
+    },
+    {
+        "q": "Your farts",
+        "a1": "Loud",
+        "a2": "Smelly",
+    },
+    {
+        "q": "At the pool",
+        "a1": "30 laps",
+        "a2": "Lay in the shallow end",
+    },
     // {
     //     "q": "Q",
     //     "a1": "A",

@@ -597,6 +597,76 @@ const questions = [
         "a1": "30 laps",
         "a2": "Lay in the shallow end",
     },
+    {
+        "q": "At the bar",
+        "a1": "Drinks are on me!",
+        "a2": "I forgot my wallet...",
+    },
+    {
+        "q": "Usually overestimate",
+        "a1": "Your physical abilities",
+        "a2": "Your memory",
+    },
+    {
+        "q": "Worst drivers",
+        "a1": "Drive slow in the fast lane",
+        "a2": "Stick to your back",
+    },
+    {
+        "q": "Speak",
+        "a1": "22 living languages",
+        "a2": "To animals",
+    },
+    {
+        "q": "In 10 years, you dream of being",
+        "a1": "Settler on Mars",
+        "a2": "Ruler on Earth",
+    },
+    {
+        "q": "Be better in",
+        "a1": "Math",
+        "a2": "History",
+    },
+    {
+        "q": "A world without",
+        "a1": "Screens",
+        "a2": "Music",
+    },
+    {
+        "q": "When you wake up",
+        "a1": "You scratch your scrotch",
+        "a2": "You fart",
+    },
+    {
+        "q": "Arrive at a meeting",
+        "a1": "Early",
+        "a2": "Late",
+    },
+    {
+        "q": "Your guilty pleasure",
+        "a1": "Kids TV show",
+        "a2": "Dumb Reality TV show",
+    },
+    {
+        "q": "Genetically engineer",
+        "a1": "T-rex",
+        "a2": "Unicorn",
+    },
+    {
+        "q": "Shopping",
+        "a1": "Online",
+        "a2": "In shops",
+    },
+    {
+        "q": "Sex with",
+        "a1": "Lights On",
+        "a2": "Lights Off",
+    },
+    {
+        "q": "Once Every Monday you can",
+        "a1": "Shit gold",
+        "a2": "Teleport",
+    },
     // {
     //     "q": "Q",
     //     "a1": "A",

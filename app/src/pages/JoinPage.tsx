@@ -12,20 +12,21 @@ interface JoinPageProps {
   onUserType: (host: boolean) => void;
 }
 function JoinPage({ onUserType }: JoinPageProps) {
-  const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
-  useEffect(()=>{
-    AudioData.startReceiving(()=>{
-      setAudioEnabled(true)
-    });
-  },[])
+  const [hostPicked, setHostPicked] = useState<boolean>(false);
+
   const handleClick = (isHost:boolean) => {
-    onUserType(isHost);
+    setHostPicked(true)
+    AudioData.startReceiving(() => {
+      onUserType(isHost);
+    }, () => {
+      onUserType(false);
+    });
   };
   const renderToolbar = () => {
     return (
       <IonHeader>
         <IonToolbar>
-          <IonTitle className=" text-start">{audioEnabled ? "Host or Join?" : "Please allow the use of your microphone"}</IonTitle>
+          <IonTitle className=" text-start">{!hostPicked ? "Host or Join?" : "Please allow the use of your microphone"}</IonTitle>
         </IonToolbar>
       </IonHeader>
     );
@@ -37,9 +38,9 @@ function JoinPage({ onUserType }: JoinPageProps) {
         {renderToolbar()}
         <div className="fullheight xc">
           <div className="container hcs">
-            {audioEnabled?<>
-            <IonButton disabled={!audioEnabled} color="medium" size="large" onClick={() => handleClick(true)}>Host</IonButton>
-            <IonButton disabled={!audioEnabled} size="large" onClick={() => handleClick(false)}>Join</IonButton>
+            {!hostPicked ? <>
+            <IonButton disabled={hostPicked} color="medium" size="large" onClick={() => handleClick(true)}>Host</IonButton>
+            <IonButton disabled={hostPicked} size="large" onClick={() => handleClick(false)}>Join</IonButton>
             </> : <span>Please allow the use of your microphone</span>}
           </div>
         </div>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import NamePage from './NamePage';
 import JoinPage from './JoinPage';
 import GamePage from './GamePage';
 const Main: React.FC = () => {
 
-	const [name, setName] = useState<string>("");
+	const id = Date.now().toString().slice(8)
 	const [host, setHost] = useState<boolean>(false);
 	const [gameState, setGameState] = useState<string>("");
 	const [isVertical, setIsVertical] = useState<boolean>(window.innerWidth < window.innerHeight);
@@ -13,18 +12,12 @@ const Main: React.FC = () => {
 		setInterval(() => {
 			setIsVertical(window.innerWidth < window.innerHeight);
 		}, 1000);
-		setGameState("name");
-		// nameSet("Fran"); // DEBUG
+		setGameState("join");
 		// userTypeSet(true);// DEBUG
 	}, []);
 
-	const nameSet = (name:string) => {
-		console.log(`Name set to '${name}'`);
-		setName(name);
-		setGameState("join");
-	}
 	const userTypeSet = (host:boolean) => {
-		console.log(`User '${name}' is ${host ? "host" : "guest"}`);
+		console.log(`User '${id}' is ${host ? "host" : "guest"}`);
 		setHost(host);
 		setGameState("game");
 	}
@@ -39,9 +32,8 @@ const Main: React.FC = () => {
 		)
 	}
 	const states = {
-		"name": <NamePage onName={nameSet} />,
 		"join": <JoinPage onUserType={userTypeSet}/>,
-		"game": <GamePage name={name} host={host}/>
+		"game": <GamePage id={id} host={host}/>
 	}
 	return states[gameState] || <div>Unknown state</div>;
 };

@@ -14,6 +14,7 @@ ggwave_factory().then(function (obj) {
 
 const AudioData = {
 
+  accepted: false,
   audioContext: null,
   parameters: null,
   instance: null,
@@ -54,9 +55,9 @@ const AudioData = {
     this.init(() => {
       if (this.instance !== null) {
         // generate audio waveform
-        // var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST, 15)
-        var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FASTEST, 15)
-        // var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_ULTRASOUND_FASTEST, 15)
+        // var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FAST, 40)
+        var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_AUDIBLE_FASTEST, 40)
+        // var waveform = ggwave.encode(this.instance, data, ggwave.ProtocolId.GGWAVE_PROTOCOL_ULTRASOUND_FASTEST, 40)
 
         // play audio
         var buf = convertTypedArray(waveform, Float32Array);
@@ -79,7 +80,7 @@ const AudioData = {
   addCallback: function (callback) {
     this.callbacks.push(callback);
   },
-  startReceiving: function (onAccepted=null, callbacks = []) {
+  startReceiving: function (onAccepted=null, onRefused=null, callbacks = []) {
     this.init(
       () => {
         if (this.instance !== null) {
@@ -101,6 +102,7 @@ const AudioData = {
           navigator.mediaDevices.getUserMedia(constraints).then((e) => {
             console.log("Accepted Audio")
             onAccepted && onAccepted()
+            this.accepted = true
             this.mediaStream = this.context.createMediaStreamSource(e);
 
             var bufferSize = 1024;
@@ -136,6 +138,9 @@ const AudioData = {
             this.recorder.connect(this.context.destination);
             console.log("Receiver started");
           }).catch((e) => {
+            console.log("Refused Audio")
+            this.accepted = false
+            onRefused && onRefused()
             console.error(e);
           });
         } else {

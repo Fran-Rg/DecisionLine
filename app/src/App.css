@@ -1,3 +1,7 @@
+.player--1 {
+    --background: #000000;
+    --color: white;
+}
 .player-0 {
     --background: #000000;
     --color: white;

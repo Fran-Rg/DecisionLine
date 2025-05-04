@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useReducer } from 'react';
+import { useState, useEffect, useRef, useReducer, Fragment } from 'react';
 import {
   IonContent,
   IonHeader,
@@ -15,7 +15,7 @@ import {
   IonToolbar,
   IonFooter,
 } from '@ionic/react';
-import { chevronForward, sync } from 'ionicons/icons';
+import { chevronForward, chevronBack, addCircleOutline, removeCircleOutline, sync } from 'ionicons/icons';
 
 import getRandomQuestion, { Question } from '../data/Questions';
 import getChildren from '../data/Player';
@@ -23,22 +23,24 @@ import AudioData from '../components/AudioData';
 
 interface GamePageProps {
   host: boolean,
-  name: string,
+  id: string,
 }
-function GamePage({ host, name }: GamePageProps) {
+function GamePage({ host, id }: GamePageProps) {
 
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const seed= useRef<string>("");
+  const seed = useRef<string>("");
   const joinHash = useRef<string>("");
-  const [playerNumber, setPlayerNumber] = useState<number>(-1);
+  const [playerNumber, setPlayerNumber] = useState<number>(AudioData.accepted ? -1 : 1);
   const playerTracker = useRef<any>({});
-  const roundNumber = useRef<number>(-1);
+  const roundNumber = useRef<number>(1);
   const [question, setQuestion] = useState<Question>();
 
   useEffect(() => {
     console.log("GamePage mounted");
-    AudioData.resetCallbacks();
-    AudioData.addCallback(onDataReceived);
+    if (AudioData.accepted) {
+      AudioData.resetCallbacks();
+      AudioData.addCallback(onDataReceived);
+    }
     if (host) {
       setPlayerNumber(0);
       roundNumber.current = 1;
@@ -46,7 +48,6 @@ function GamePage({ host, name }: GamePageProps) {
     } else {
       joinHash.current = String(Math.floor(Math.random() * (10000 + 1))).padStart(5, '0')
     }
-
   }, []);
   useEffect(() => {
     setQuestion(getRandomQuestion(seed.current, playerNumber, roundNumber.current))
@@ -93,11 +94,11 @@ function GamePage({ host, name }: GamePageProps) {
   // Host handlers
   const onSync = (payload: string[]) => {
     let playerNumber;
-    if (!Object.keys(playerTracker.current).includes(payload[0])){
+    if (!Object.keys(playerTracker.current).includes(payload[0])) {
       playerNumber = Object.keys(playerTracker.current).length + 1
       console.log(`New player ${payload[0]} join as player ${playerNumber}`)
       playerTracker.current[payload[0]] = playerNumber
-    }else{
+    } else {
       playerNumber = playerTracker.current[payload[0]]
       console.log(`Existing player ${payload[0]} sync as player ${playerNumber}`)
     }
@@ -107,39 +108,42 @@ function GamePage({ host, name }: GamePageProps) {
   }
   const goNext = () => {
     const newRoundNumber = roundNumber.current + 1
-    console.log(`Host Moving to Round ${newRoundNumber}`)
+    console.log(`Moving to Round ${newRoundNumber}`)
     roundNumber.current = newRoundNumber
-    send(['c', 'n', newRoundNumber.toString()])
+    if (host) {
+      send(['c', 'n', newRoundNumber.toString()])
+    }
     forceUpdate()
   }
 
   const onAnswerJoin = (payload: string[]) => {
-    const receivedName = payload.shift()
+    const receivedId = payload.shift()
     const receivedHash = payload.shift()
-    if (receivedName === name && receivedHash === joinHash.current) {
+    if (receivedId === id && receivedHash === joinHash.current) {
       console.log(`Game info ${payload}`)
       setPlayerNumber(parseInt(payload[0]))
       roundNumber.current = parseInt(payload[1])
       seed.current = payload[2]
     } else {
-      console.log(`Game info payload Received for ${receivedName} != ${name} && ${receivedHash} != ${joinHash.current}`)
+      console.log(`Game info payload Received for ${receivedId} != ${id} && ${receivedHash} != ${joinHash.current}`)
     }
   }
-  const onNext = (newRoundNumber:number) => {
+  const onNext = (newRoundNumber: number) => {
     console.log(`Client Moving to Round ${newRoundNumber}`)
     roundNumber.current = newRoundNumber
     forceUpdate()
   }
   const forceSync = () => {
     console.log(`Client Force sync`)
-    send(['h', 's', name, joinHash.current])
+    send(['h', 's', id, joinHash.current])
   }
   // Else
   const send = (payload: string[]) => {
-    const sendingText = payload.join('.')
-    console.log(`Sending ${sendingText}`)
-    AudioData.send(sendingText);
-    //forceUpdate()
+    if (AudioData.accepted) {
+      const sendingText = payload.join('.')
+      console.log(`Sending ${sendingText}`)
+      AudioData.send(sendingText);
+    }
   }
   //Render
   const renderToolbar = () => {
@@ -147,7 +151,7 @@ function GamePage({ host, name }: GamePageProps) {
       <IonHeader>
         <IonToolbar className={`player-${playerNumber}`}>
           <IonTitle style={{ 'paddingLeft': '10px', 'textAlign': 'left' }}>
-            Round {roundNumber.current} - {host? "Host" : `Player ${playerNumber}`}
+            Round {roundNumber.current} - {host ? "Host" : `Player ${playerNumber}`}
           </IonTitle>
           {host &&
             <IonButtons slot="end">
@@ -157,12 +161,26 @@ function GamePage({ host, name }: GamePageProps) {
               </IonButton>
             </IonButtons>}
           {!host &&
-            <IonButtons slot="end">
-              <IonButton onClick={forceSync} className={`player-${playerNumber}`}>
-                Sync
-                <IonIcon slot="end" icon={sync}></IonIcon>
-              </IonButton>
-            </IonButtons>}
+            <Fragment>
+              <IonButtons slot="end">
+                <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber - 1)}>
+                  <IonIcon slot="end" icon={removeCircleOutline} />
+                </IonButton>
+                <span>Player Number</span>
+                <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
+                  <IonIcon slot="end" icon={addCircleOutline} />
+                </IonButton>
+                <IonButton onClick={goNext} className={`player-${playerNumber}`}>
+                  Next Round
+                  <IonIcon slot="end" icon={chevronForward} />
+                </IonButton>
+                {AudioData.accepted && <IonButton onClick={forceSync} className={`player-${playerNumber}`}>
+                  Sync
+                  <IonIcon slot="end" icon={sync} />
+                </IonButton>}
+              </IonButtons>
+            </Fragment>
+          }
           {!host && playerNumber === -1 &&
             <IonProgressBar type="indeterminate"></IonProgressBar>}
         </IonToolbar>

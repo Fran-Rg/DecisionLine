@@ -23,7 +23,8 @@ import '@ionic/react/css/display.css';
 import Main from './pages/Main';
 
 setupIonicReact({
-	mode:'ios',
+	mode: 'ios',
+	innerHTMLTemplatesEnabled: true,
 });
 
 function App() {

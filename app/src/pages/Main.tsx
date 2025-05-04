@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import JoinPage from './JoinPage';
 import GamePage from './GamePage';
+import { IonAlert, IonicSafeString, IonIcon } from '@ionic/react';
+import { shareOutline, ellipsisVertical } from 'ionicons/icons';
+import { renderToStaticMarkup } from 'react-dom/server'
+function iOS() {
+	return [
+		'iPad Simulator',
+		'iPhone Simulator',
+		'iPod Simulator',
+		'iPad',
+		'iPhone',
+		'iPod'
+	].includes(navigator.platform)
+}
 const Main: React.FC = () => {
 
 	const id = Date.now().toString().slice(8)
 	const [host, setHost] = useState<boolean>(false);
 	const [gameState, setGameState] = useState<string>("");
 	const [isVertical, setIsVertical] = useState<boolean>(window.innerWidth < window.innerHeight);
+	const isPWA = window.matchMedia('(display-mode: standalone)').matches
 
 	useEffect(() => {
 		setInterval(() => {
 			setIsVertical(window.innerWidth < window.innerHeight);
 		}, 1000);
-		setGameState("join");
+		console.log("Is PWA: ", isPWA)
+		if (isPWA) {
+			setGameState("join");
+		}
 		// userTypeSet(true);// DEBUG
 	}, []);
 
-	const userTypeSet = (host:boolean) => {
+	const userTypeSet = (host: boolean) => {
 		console.log(`User '${id}' is ${host ? "host" : "guest"}`);
 		setHost(host);
 		setGameState("game");
@@ -32,10 +49,21 @@ const Main: React.FC = () => {
 		)
 	}
 	const states = {
-		"join": <JoinPage onUserType={userTypeSet}/>,
-		"game": <GamePage id={id} host={host}/>
+		"join": <JoinPage onUserType={userTypeSet} />,
+		"game": <GamePage id={id} host={host} />
 	}
-	return states[gameState] || <div>Unknown state</div>;
+	const exportIcon = renderToStaticMarkup(<IonIcon icon={iOS() ? shareOutline : ellipsisVertical} style={{
+		minHeight: "20px",
+		minWidth: "20px",
+	}} />)
+	return states[gameState] || (<div>
+		<IonAlert
+			isOpen={true}
+			header="Install me"
+			message={new IonicSafeString(`This works better as an app<br/>Click ${exportIcon}<br/> "Add to Home Screen"`)}
+			buttons={['Ok']}
+			onDidDismiss={() => setGameState("join")}
+		/><div>Loading...</div>
+	</div>);
 };
-
 export default Main;

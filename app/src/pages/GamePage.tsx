@@ -15,7 +15,7 @@ import {
   IonToolbar,
   IonFooter,
 } from '@ionic/react';
-import { chevronForward, chevronBack, addCircleOutline, removeCircleOutline, sync } from 'ionicons/icons';
+import { chevronForward, addCircleOutline, removeCircleOutline, sync } from 'ionicons/icons';
 
 import getRandomQuestion, { Question } from '../data/Questions';
 import getChildren from '../data/Player';
@@ -28,7 +28,7 @@ interface GamePageProps {
 function GamePage({ host, id }: GamePageProps) {
 
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const seed = useRef<string>("");
+  const seed = useRef<string>(Date.now().toString().slice(8));
   const joinHash = useRef<string>("");
   const [playerNumber, setPlayerNumber] = useState<number>(AudioData.accepted ? -1 : 1);
   const playerTracker = useRef<any>({});
@@ -44,7 +44,6 @@ function GamePage({ host, id }: GamePageProps) {
     if (host) {
       setPlayerNumber(0);
       roundNumber.current = 1;
-      seed.current = String(Math.floor(Math.random() * (10000 + 1))).padStart(5, '0')
     } else {
       joinHash.current = String(Math.floor(Math.random() * (10000 + 1))).padStart(5, '0')
     }

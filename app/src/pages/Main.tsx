@@ -14,9 +14,20 @@ function iOS() {
 		'iPod'
 	].includes(navigator.platform)
 }
+function getMachineId() {
+
+	let machineId = localStorage.getItem('MachineId');
+
+	if (!machineId) {
+		machineId = Date.now().toString().slice(8);
+		localStorage.setItem('MachineId', machineId);
+	}
+
+	return machineId;
+}
 const Main: React.FC = () => {
 
-	const id = Date.now().toString().slice(8)
+	const id = getMachineId()
 	const [host, setHost] = useState<boolean>(false);
 	const [gameState, setGameState] = useState<string>("");
 	const [isVertical, setIsVertical] = useState<boolean>(window.innerWidth < window.innerHeight);

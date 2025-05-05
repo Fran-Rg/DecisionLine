@@ -148,37 +148,35 @@ function GamePage({ host, id }: GamePageProps) {
   const renderToolbar = () => {
     return (
       <IonHeader>
-        <IonToolbar className={`player-${playerNumber}`}>
-          <IonTitle style={{ 'paddingLeft': '10px', 'textAlign': 'left' }}>
+        <IonToolbar className={`player-${playerNumber}`} style={{ minHeight: '70px' }}>
+          <IonTitle style={{ 'paddingLeft': '10px', 'textAlign': 'left', 'minHeight': '70px' }}>
             Round {roundNumber.current} - {host ? "Host" : `Player ${playerNumber}`}
           </IonTitle>
           {host &&
-            <IonButtons slot="end">
+            <IonButtons slot="end" style={{ 'minHeight': '70px', transform: "scale(1.2)" }}>
               <IonButton onClick={goNext} className={`player-${playerNumber}`}>
                 Next
                 <IonIcon slot="end" icon={chevronForward}></IonIcon>
               </IonButton>
             </IonButtons>}
           {!host &&
-            <Fragment>
-              <IonButtons slot="end">
-                <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber - 1)}>
-                  <IonIcon slot="end" icon={removeCircleOutline} />
-                </IonButton>
-                <span>Player Number</span>
-                <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
-                  <IonIcon slot="end" icon={addCircleOutline} />
-                </IonButton>
-                <IonButton onClick={goNext} className={`player-${playerNumber}`}>
-                  Next Round
-                  <IonIcon slot="end" icon={chevronForward} />
-                </IonButton>
-                {AudioData.accepted && <IonButton onClick={forceSync} className={`player-${playerNumber}`}>
-                  Sync
-                  <IonIcon slot="end" icon={sync} />
-                </IonButton>}
-              </IonButtons>
-            </Fragment>
+            <IonButtons slot="end" style={{ 'minHeight': '70px', transform: "scale(1.1) translateX(-12px)" }}>
+              <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber - 1)}>
+                <IonIcon slot="end" icon={removeCircleOutline} />
+              </IonButton>
+              <span>Player Number</span>
+              <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
+                <IonIcon slot="end" icon={addCircleOutline} />
+              </IonButton>
+              <IonButton onClick={goNext} className={`player-${playerNumber}`}>
+                Next Round
+                <IonIcon slot="end" icon={chevronForward} />
+              </IonButton>
+              {AudioData.accepted && <IonButton onClick={forceSync} className={`player-${playerNumber}`}>
+                Sync
+                <IonIcon slot="end" icon={sync} />
+              </IonButton>}
+            </IonButtons>
           }
           {!host && playerNumber === -1 &&
             <IonProgressBar type="indeterminate"></IonProgressBar>}
@@ -188,16 +186,18 @@ function GamePage({ host, id }: GamePageProps) {
   };
   const renderQuestion = () => {
     return (
-      <div>
-        <IonCard color="medium" >
-          <IonCardContent>
-            <IonCardTitle>{question != undefined && question.q}?</IonCardTitle>
+      <div style={{ height: "80%" }}>
+        <IonCard color="medium" style={{ height: "100%" }}>
+          <IonCardContent style={{
+            "position": "absolute",
+            "top": "50%",
+            "left": "50%",
+            "width": "90%",
+            "-ms-transform": "translateY(-50%) translateX(-50%)",
+            "transform": "translateY(-50%) translateX(-50%)",
+          }}>
+            <IonCardTitle style={{ textAlign: "center" }}><div style={{ transform: "rotate(180deg) scale(0.9)", opacity: 0.7 }}>{question != undefined && question.q}?</div>{question != undefined && question.q}?</IonCardTitle>
           </IonCardContent>
-        </IonCard>
-        <IonCard color="light">
-          <IonCardHeader>
-            <IonCardTitle style={{ transform: "rotate(180deg)" }}>{question != undefined && question.q}?</IonCardTitle>
-          </IonCardHeader>
         </IonCard>
       </div>
     );

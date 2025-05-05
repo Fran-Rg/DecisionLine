@@ -573,7 +573,7 @@ const questions = [
         "a2": "The edges of space",
     },
     {
-        "q": "Most awkward to walk in during action in dev",
+        "q": "Most awkward to walk in during action in bed",
         "a1": "Your parents on you",
         "a2": "You on your parents",
     },

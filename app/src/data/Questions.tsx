@@ -820,7 +820,7 @@ const questions = [
     {
         "q": "Lick a body smeared with",
         "a1": "Chocolate",
-        "a2": "",
+        "a2": "Champagne",
     },
     {
         "q": "Kill",

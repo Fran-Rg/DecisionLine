@@ -667,6 +667,266 @@ const questions = [
         "a1": "Shit gold",
         "a2": "Teleport",
     },
+    {
+        "q": "Worst sort of text to send to your boss",
+        "a1": "Sext",
+        "a2": "Gossip... about your boss",
+    },
+    {
+        "q": "Run naked",
+        "a1": "Through cacti",
+        "a2": "In front of coworkers",
+    },
+    {
+        "q": "Get your diploma",
+        "a1": "With honors, by cheating",
+        "a2": "Fairly, on the 3rd try",
+    },
+    {
+        "q": "Steal",
+        "a1": "Toilet paper from the office",
+        "a2": "Robe from the hotel",
+    },
+    {
+        "q": "Masturbation",
+        "a1": "3 times per year",
+        "a2": "3 times per day",
+    },
+    {
+        "q": "Your friend is being cheated on",
+        "a1": "You tell them",
+        "a2": "You keep the secret",
+    },
+    {
+        "q": "Sneezing while drunk",
+        "a1": "You fart at the same time",
+        "a2": "You vomit in your mouth",
+    },
+    {
+        "q": "Two people fighting",
+        "a1": "You film them",
+        "a2": "You separate them",
+    },
+    {
+        "q": "At the grocery",
+        "a1": "You get more than needed, much more",
+        "a2": "Strict minimum",
+    },
+    {
+        "q": "Shopping spree",
+        "a1": "With pleasure!",
+        "a2": "No, thank you",
+    },
+    {
+        "q": "Know",
+        "a1": "How you will die",
+        "a2": "When your partner will die",
+    },
+    {
+        "q": "Karaoke",
+        "a1": "Try hard",
+        "a2": "Scream hard",
+    },
+    {
+        "q": "In the street",
+        "a1": "Step in a dog shit",
+        "a2": "Pigeon poops on you",
+    },
+    {
+        "q": "Vacation home",
+        "a1": "Vatican",
+        "a2": "Versailles",
+    },
+    {
+        "q": "What you like about your job",
+        "a1": "Your salary",
+        "a2": "Your coworkers",
+    },
+    {
+        "q": "Sniff",
+        "a1": "Your farts under the cover",
+        "a2": "Your underwear to re-use them",
+    },
+    {
+        "q": "Drink",
+        "a1": "1 Glass of blood",
+        "a2": "1 Glass of sperm",
+    },
+    {
+        "q": "Win the lottery",
+        "a1": "$100,000 this year",
+        "a2": "$1,000,000 in 10 years",
+    },
+    {
+        "q": "Hurt friendship more",
+        "a1": "Forget to wish you happy birthday",
+        "a2": "Forget to pay you back",
+    },
+    {
+        "q": "Never again have to do",
+        "a1": "Laundry",
+        "a2": "Dishes",
+    },
+    {
+        "q": "Most likely midlife crisis",
+        "a1": "You get in debt to start your company",
+        "a2": "You leave everything to raise goats",
+    },
+    {
+        "q": "Never again suffer from",
+        "a1": "Lack of sleep",
+        "a2": "Hunger",
+    },
+    {
+        "q": "Worst to forever have bad",
+        "a1": "Internet connection",
+        "a2": "Breath",
+    },
+    {
+        "q": "Reading this book on the tube",
+        "a1": "Why can't I please my partner",
+        "a2": "Fisting for Dummies",
+    },
+    {
+        "q": "Ideal home",
+        "a1": "Big living room",
+        "a2": "Big kitchen",
+    },
+    {
+        "q": "Pornhub Goal",
+        "a1": "Watch every video",
+        "a2": "Get 1 Million views on your video",
+    },
+    {
+        "q": "As a couple",
+        "a1": "Fights, but mind-blowing sex",
+        "a2": "Never fight, but no touching",
+    },
+    {
+        "q": "Prefer to carpool with a",
+        "a1": "Scientologist",
+        "a2": "Flat earther",
+    },
+    {
+        "q": "See the future",
+        "a1": "For yourself",
+        "a2": "For your loved ones",
+    },
+    {
+        "q": "Being world champion of",
+        "a1": "Rock, Paper, Scissors",
+        "a2": "Bilboquet/Cup and ball",
+    },
+    {
+        "q": "Lick a body smeared with",
+        "a1": "Chocolate",
+        "a2": "",
+    },
+    {
+        "q": "Kill",
+        "a1": "A close friend",
+        "a2": "Two babies",
+    },
+    {
+        "q": "When you're bored",
+        "a1": "Snack on everything",
+        "a2": "Binge TV shows",
+    },
+    {
+        "q": "Swim with",
+        "a1": "Dolphins",
+        "a2": "Wales",
+    },
+    {
+        "q": "Classic email mistake",
+        "a1": "Reply all by accident",
+        "a2": "You forget the attachment",
+    },
+    {
+        "q": "Meal",
+        "a1": "At least 20 photos",
+        "a2": "Refill at least 5 times",
+    },
+    {
+        "q": "Videogames",
+        "a1": "It was better 20 years ago",
+        "a2": "The new stuff is better",
+    },
+    {
+        "q": "Picking a beach",
+        "a1": "Crowded sandy beach",
+        "a2": "Deserted pebble beach",
+    },
+    {
+        "q": "Befriend",
+        "a1": "An alien",
+        "a2": "A robot",
+    },
+    {
+        "q": "Amazing orgasm every time",
+        "a1": "For you",
+        "a2": "For your partners",
+    },
+    {
+        "q": "Reuse",
+        "a1": "Condom",
+        "a2": "Toilet paper",
+    },
+    {
+        "q": "Take a dump",
+        "a1": "With someone in the next stall",
+        "a2": "While talking on the phone",
+    },
+    {
+        "q": "Live in the world of",
+        "a1": "Star Wards, as a Jedi",
+        "a2": "X-Men, as a mutant",
+    },
+    {
+        "q": "Mint chocolate chip ice cream",
+        "a1": "You eat it",
+        "a2": "You erase it from the planet",
+    },
+    {
+        "q": "Your best birthday",
+        "a1": "Just friends",
+        "a2": "Just family",
+    },
+    {
+        "q": "Tatto",
+        "a1": "Hidden",
+        "a2": "Visible",
+    },
+    {
+        "q": "You regularly forget",
+        "a1": "Your keys",
+        "a2": "Your password",
+    },
+    {
+        "q": "You have the flu",
+        "a1": "Non stop whinning",
+        "a2": "One suppository and done",
+    },
+    {
+        "q": "Pubes",
+        "a1": "Shave it",
+        "a2": "Natural/Trim it",
+    },
+    {
+        "q": "When you're wrong",
+        "a1": "Admit your mistake",
+        "a2": "I'm never wrong",
+    },
+    {
+        "q": "Orgy with",
+        "a1": "Your neighbors",
+        "a2": "Your coworkers",
+    },
+    {
+        "q": "French",
+        "a1": "Cheese",
+        "a2": "Wine",
+    },
     // {
     //     "q": "Q",
     //     "a1": "A",

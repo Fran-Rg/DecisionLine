@@ -927,6 +927,146 @@ const questions = [
         "a1": "Cheese",
         "a2": "Wine",
     },
+    {
+        "q": "In a plan",
+        "a1": "You worry",
+        "a2": "You enjoy",
+    },
+    {
+        "q": "The worst people on dating app",
+        "a1": "Just say 'hey wyd?'",
+        "a2": "Look nothing like their photo",
+    },
+    {
+        "q": "Would hurt you the most",
+        "a1": "Get cheated on",
+        "a2": "Have your bank account emptied",
+    },
+    {
+        "q": "At a restaurant",
+        "a1": "'Just the usual'",
+        "a2": "Wild menu pick",
+    },
+    {
+        "q": "Give your name to",
+        "a1": "A sex position",
+        "a2": "A drug",
+    },
+    {
+        "q": "TV night with friends",
+        "a1": "Classic movie",
+        "a2": "Stupid/B movie",
+    },
+    {
+        "q": "Wearing clothes",
+        "a1": "Clean but damp",
+        "a2": "Dry but dirty",
+    },
+    {
+        "q": "After winning",
+        "a1": "Loud bragging",
+        "a2": "Fake modesty",
+    },
+    {
+        "q": "Blowjob",
+        "a1": "In the car",
+        "a2": "At the cinema",
+    },
+    {
+        "q": "Free ticket for any plastic surgery",
+        "a1": "Take it",
+        "a2": "Leave it",
+    },
+    {
+        "q": "Unforgivable",
+        "a1": "Drunk driving",
+        "a2": "Smoking near a pregnant person",
+    },
+    {
+        "q": "Watching movies",
+        "a1": "Shhhh, keep quiet",
+        "a2": "Comment all along",
+    },
+    {
+        "q": "Worst to find out that",
+        "a1": "Your friends are paid actors",
+        "a2": "The meat you ate was human flesh",
+    },
+    {
+        "q": "Preferred sexual position",
+        "a1": "You on top",
+        "a2": "You at the bottom",
+    },
+    {
+        "q": "Worst to never be able to wash",
+        "a1": "Below waist",
+        "a2": "Above waist",
+    },
+    {
+        "q": "Have an affair with",
+        "a1": "Rich and famous",
+        "a2": "Sexy and funnny",
+    },
+    {
+        "q": "Pisses you off",
+        "a1": "I told you so",
+        "a2": "You don't know that!?",
+    },
+    {
+        "q": "Reincarnation",
+        "a1": "As a man",
+        "a2": "As a woman",
+    },
+    {
+        "q": "Propose where",
+        "a1": "In a private place",
+        "a2": "In a public place",
+    },
+    {
+        "q": "Must pay a debt",
+        "a1": "You sell a kindney",
+        "a2": "You sell your body",
+    },
+    {
+        "q": "Naked in public showers with others",
+        "a1": "You look at everyone else",
+        "a2": "You stare at the ground",
+    },
+    {
+        "q": "Perfect excuse",
+        "a1": "Family problem",
+        "a2": "Health problem",
+    },
+    {
+        "q": "Forever live without",
+        "a1": "Laughter",
+        "a2": "Orgasm",
+    },
+    {
+        "q": "Get stuck with",
+        "a1": "Your finger in a butt",
+        "a2": "A finger in your butt",
+    },
+    {
+        "q": "Better tv show",
+        "a1": "Cooking show",
+        "a2": "Popular Reality TV show",
+    },
+    // {
+    //     "q": "Q",
+    //     "a1": "A",
+    //     "a2": "A",
+    // },
+    // {
+    //     "q": "Q",
+    //     "a1": "A",
+    //     "a2": "A",
+    // },
+    // {
+    //     "q": "Q",
+    //     "a1": "A",
+    //     "a2": "A",
+    // },
     // {
     //     "q": "Q",
     //     "a1": "A",

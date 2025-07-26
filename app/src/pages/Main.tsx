@@ -22,8 +22,8 @@ declare global {
 const Main: React.FC = () => {
   const [gameState, setGameState] = useState<string>("");
   const [isVertical, setIsVertical] = useState<boolean>(window.innerWidth < window.innerHeight);
-//   const isPWA = window.matchMedia('(display-mode: standalone)').matches
-  const isPWA = true //DEBUG
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches
+  // const isPWA = true //DEBUG
 
   useEffect(() => {
     setInterval(() => {

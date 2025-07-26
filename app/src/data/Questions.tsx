@@ -580,7 +580,7 @@ const questions = [
     {
         "q": "Worst to have a chastity belt",
         "a1": "Every weekend forever",
-        "a2": "2 years from now",
+        "a2": "For 2 years from now",
     },
     {
         "q": "Tour of",
@@ -728,7 +728,7 @@ const questions = [
         "a2": "Scream hard",
     },
     {
-        "q": "In the street",
+        "q": "Worst situation in the street",
         "a1": "Step in a dog shit",
         "a2": "Pigeon poops on you",
     },

@@ -31,7 +31,8 @@ const Main: React.FC = () => {
 	const [host, setHost] = useState<boolean>(false);
 	const [gameState, setGameState] = useState<string>("");
 	const [isVertical, setIsVertical] = useState<boolean>(window.innerWidth < window.innerHeight);
-	const isPWA = window.matchMedia('(display-mode: standalone)').matches
+	// const isPWA = window.matchMedia('(display-mode: standalone)').matches
+	const isPWA = true //DEBUG
 
 	useEffect(() => {
 		setInterval(() => {
@@ -40,6 +41,8 @@ const Main: React.FC = () => {
 		console.log("Is PWA: ", isPWA)
 		if (isPWA) {
 			setGameState("join");
+		}else{
+			setGameState("pwa");
 		}
 		// userTypeSet(true);// DEBUG
 	}, []);
@@ -59,22 +62,21 @@ const Main: React.FC = () => {
 			</div>
 		)
 	}
-	const states = {
-		"join": <JoinPage onUserType={userTypeSet} />,
-		"game": <GamePage id={id} host={host} />
-	}
 	const exportIcon = renderToStaticMarkup(<IonIcon icon={iOS() ? shareOutline : ellipsisVertical} style={{
 		minHeight: "20px",
 		minWidth: "20px",
 	}} />)
-	return states[gameState] || (<div>
-		<IonAlert
-			isOpen={true}
-			header="Install me"
-			message={new IonicSafeString(`This works better as an app<br/>Click ${exportIcon}<br/> "Add to Home Screen"`)}
-			buttons={['Ok']}
-			onDidDismiss={() => setGameState("join")}
-		/><div>Loading...</div>
-	</div>);
+	const states = {
+		"pwa": (<IonAlert
+				isOpen={true}
+				header="Install me"
+				message={new IonicSafeString(`This works better as an app<br/>Click ${exportIcon}<br/> "Add to Home Screen"`)}
+				buttons={['Ok']}
+				onDidDismiss={() => setGameState("join")}
+			/>),
+		"join": <JoinPage onUserType={userTypeSet} />,
+		"game": <GamePage id={id} host={host} />
+	}
+	return states[gameState] || (<div>Loading...</div>);
 };
 export default Main;

@@ -11,7 +11,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico'],
       manifest: {
-        "short_name": "LeftRight",
+        "short_name": "DecisionLine",
         "name": "Decision Line",
         "icons": [
           {

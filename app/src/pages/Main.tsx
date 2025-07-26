@@ -35,7 +35,7 @@ const Main: React.FC = () => {
     }else{
       setGameState("pwa");
     }
-    setGameState("game") //DEBUG
+    // setGameState("game") //DEBUG
   }, []);
 
   if (isVertical) {

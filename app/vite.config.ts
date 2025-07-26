@@ -12,7 +12,7 @@ export default defineConfig({
       includeAssets: ['favicon.ico'],
       manifest: {
         "short_name": "LeftRight",
-        "name": "Left Right Dilemma",
+        "name": "Decision Line",
         "icons": [
           {
             "src": "favicon.png",

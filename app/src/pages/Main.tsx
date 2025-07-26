@@ -38,7 +38,7 @@ const Main: React.FC = () => {
     // setGameState("game") //DEBUG
   }, []);
 
-  if (isVertical) {
+  if (isVertical && gameState !== "pwa") {
     return (
       <div style={{ textAlign: 'center', marginTop: '80%' }}>
         <p>

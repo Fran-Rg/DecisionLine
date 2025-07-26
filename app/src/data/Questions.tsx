@@ -1052,6 +1052,96 @@ const questions = [
         "a1": "Cooking show",
         "a2": "Popular Reality TV show",
     },
+    {
+        "q": "Work",
+        "a1": "Passion but uncertain income",
+        "a2": "Boring but predictable income"
+    },
+    {
+        "q": "Freedom vs Responsibility",
+        "a1": "Personal freedom first",
+        "a2": "Society comes first"
+    },
+    {
+        "q": "I have to tell you...",
+        "a1": "Honest but hurtful",
+        "a2": "Nice but dishonest"
+    },
+    {
+        "q": "An AI powered politic regime",
+        "a1": "Could work",
+        "a2": "Nuclear war in 6 months"
+    },
+    {
+        "q": "Manage money",
+        "a1": "Live now, spend",
+        "a2": "Plan ahead, save"
+    },
+    {
+        "q": "If you could get more",
+        "a1": "Time",
+        "a2": "Money"
+    },
+    {
+        "q": "Parenting",
+        "a1": "Strict and safe",
+        "a2": "Loose and free"
+    },
+    {
+        "q": "Charity",
+        "a1": "Help locally",
+        "a2": "Help globally"
+    },
+    {
+        "q": "Beliefs",
+        "a1": "Speak your truth",
+        "a2": "Keep peace"
+    },
+    {
+        "q": "Ethics",
+        "a1": "Use animal tests",
+        "a2": "Risk human life"
+    },
+    {
+        "q": "Commute",
+        "a1": "Tube packed but fast",
+        "a2": "Bus slow but comfy"
+    },
+    {
+        "q": "Morning",
+        "a1": "Coffee first",
+        "a2": "Shower first"
+    },
+    {
+        "q": "Work lunch",
+        "a1": "Cook at home",
+        "a2": "Buy on the go"
+    },
+    {
+        "q": "Weather",
+        "a1": "Rain and cool",
+        "a2": "Sun and hot"
+    },
+    {
+        "q": "Phone",
+        "a1": "iOS and locked",
+        "a2": "Android and open"
+    },
+    {
+        "q": "Shopping",
+        "a1": "One big trip",
+        "a2": "Small trips often"
+    },
+    {
+        "q": "Noise",
+        "a1": "Headphones always",
+        "a2": "Embrace the city"
+    },
+    {
+        "q": "Sleep",
+        "a1": "Early to bed",
+        "a2": "Late and wild"
+    },
     // {
     //     "q": "Q",
     //     "a1": "A",

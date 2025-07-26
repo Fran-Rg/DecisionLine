@@ -31,12 +31,17 @@ function getTimeSeed() {
 function GamePage() {
   const seed = useRef<string>(getTimeSeed());
   const [playerNumber, setPlayerNumber] = useState<number>(0);
+  const [scoreNumber, setScoreNumber] = useState<number>(0);
   const [roundNumber, setRoundNumber] = useState<number>(1);
   const [n1, setN1] = useState<number>(0);
   const [n2, setN2] = useState<number>(0);
   const [question, setQuestion] = useState<Question>();
+  const [scoreMode, setScoreMode] = useState<boolean>(false);
   const tapCountRefs = [useRef(0), useRef(0)];
   const tapTimerRefs = [useRef<NodeJS.Timeout | null>(null), useRef<NodeJS.Timeout | null>(null)];
+  const playerTapCountRef = useRef(0);
+  const playerTapTimerRef = useRef<NodeJS.Timeout | null>(null);
+
 
   useEffect(() => {
     setQuestion(getRandomQuestion(seed.current, playerNumber, roundNumber))
@@ -56,24 +61,59 @@ function GamePage() {
       tapCountRefs[idx].current = 0;
     }, 350);
   };
-
+  const handlePlayerSpanTap = () => {
+    playerTapCountRef.current += 1;
+    if (playerTapTimerRef.current) {
+      clearTimeout(playerTapTimerRef.current);
+    }
+    playerTapTimerRef.current = setTimeout(() => {
+      if (playerTapCountRef.current === 2) {
+        setScoreMode((prev) => !prev);
+      }
+      playerTapCountRef.current = 0;
+    }, 350);
+  };
   //Render
   const renderToolbar = () => {
     return (
       <IonHeader>
         <IonToolbar className={`player-${playerNumber}`} style={{ minHeight: '70px' }}>
           <IonTitle style={{ 'minHeight': '70px' }}>
-            Player {playerNumber + 1} - Round {roundNumber}
+            Player {playerNumber + 1} - Round {roundNumber} (Score {scoreNumber})
           </IonTitle>
-          <IonButtons slot="start" style={{ 'minHeight': '70px', transform: "scale(1.3) translateX(20px)" }}>
-            <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(Math.max(playerNumber - 1, 0))}>
-              <IonIcon slot="start" icon={removeCircleOutline} />
-            </IonButton>
-            <span>Player Number</span>
-            <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
-              <IonIcon slot="end" icon={addCircleOutline} />
-            </IonButton>
-          </IonButtons >
+          <IonButtons slot="start" style={{ minHeight: '70px', transform: "scale(1.3) translateX(20px)" }}>
+            {!scoreMode ? (
+              <>
+                <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(Math.max(playerNumber - 1, 0))}>
+                  <IonIcon slot="start" icon={removeCircleOutline} />
+                </IonButton>
+                <span
+                  style={{ userSelect: "none", cursor: "pointer" }}
+                  onClick={handlePlayerSpanTap}
+                >
+                  Player Number
+                </span>
+                <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
+                  <IonIcon slot="end" icon={addCircleOutline} />
+                </IonButton>
+              </>
+            ) : (
+              <>
+                <IonButton className={`player-${playerNumber}`} onClick={() => setScoreNumber(Math.max(scoreNumber - 1, 0))}>
+                  <IonIcon slot="start" icon={removeCircleOutline} />
+                </IonButton>
+                <span
+                  style={{ userSelect: "none", cursor: "pointer" }}
+                  onClick={handlePlayerSpanTap}
+                >
+                  Score
+                </span>
+                <IonButton className={`player-${playerNumber}`} onClick={() => setScoreNumber(scoreNumber + 1)}>
+                  <IonIcon slot="end" icon={addCircleOutline} />
+                </IonButton>
+              </>
+            )}
+          </IonButtons>
           <IonButtons slot="end" style={{ 'minHeight': '70px', transform: "scale(1.3) translateX(-20px)" }}>
             <IonButton onClick={() => setRoundNumber(Math.max(roundNumber - 1, 1))} className={`player-${playerNumber}`}>
               <IonIcon slot="start" icon={chevronBack} />

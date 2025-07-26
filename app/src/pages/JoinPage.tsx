@@ -24,20 +24,10 @@ function JoinPage({ start }: JoinPageProps) {
         console.error(err)
       })
   }, [])
-  const renderToolbar = () => {
-    return (
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle className=" text-start">Start</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-    );
-  };
 
   return (
     <IonPage>
       <IonContent fullscreen scroll-y="false">
-        {renderToolbar()}
         <div className='outerwrap'>
         <div className='innerwrap'>
           {qrURL && (

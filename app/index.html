@@ -18,15 +18,12 @@
       if (/mobile/i.test(navigator.userAgent) && !location.hash) {
         window.scrollTo(0, 1);
       }
-  
       var noSleep = new NoSleep();
   
       function enableNoSleep() {
         console.log("No sleep enabled!");
         noSleep.enable();
-        document.removeEventListener('touchstart', enableNoSleep, false);
       }
-      document.addEventListener('touchstart', enableNoSleep, false);
     </script>
   
   </body>

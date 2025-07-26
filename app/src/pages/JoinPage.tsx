@@ -3,18 +3,18 @@ import {
   IonHeader,
   IonButton,
   IonPage,
+  IonIcon,
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import AudioData from '../components/AudioData';
 import { useEffect, useState } from 'react';
+import { chevronForward } from 'ionicons/icons';
 import QRCode from 'qrcode'
 
 interface JoinPageProps {
-  onUserType: (host: boolean) => void;
+  start: () => void;
 }
-function JoinPage({ onUserType }: JoinPageProps) {
-  const [hostPicked, setHostPicked] = useState<boolean>(false);
+function JoinPage({ start }: JoinPageProps) {
   const [qrURL, setQRurl] = useState<string>("");
 
   useEffect(() => {
@@ -24,19 +24,11 @@ function JoinPage({ onUserType }: JoinPageProps) {
         console.error(err)
       })
   }, [])
-  const handleClick = (isHost: boolean) => {
-    setHostPicked(true)
-    AudioData.startReceiving(() => {
-      onUserType(isHost);
-    }, () => {
-      onUserType(false);
-    });
-  };
   const renderToolbar = () => {
     return (
       <IonHeader>
         <IonToolbar>
-          <IonTitle className=" text-start">{!hostPicked ? "Host or Join?" : "Please allow the use of your microphone"}</IonTitle>
+          <IonTitle className=" text-start">Start</IonTitle>
         </IonToolbar>
       </IonHeader>
     );
@@ -44,17 +36,26 @@ function JoinPage({ onUserType }: JoinPageProps) {
 
   return (
     <IonPage>
-      <IonContent scroll-y="false">
+      <IonContent fullscreen scroll-y="false">
         {renderToolbar()}
-        <div className="fullheight xc">
-          <div>
-            {!hostPicked ? <>
-              <IonButton disabled={hostPicked} color="medium" size="large" onClick={() => handleClick(true)}>Host</IonButton>
-              <IonButton disabled={hostPicked} size="large" onClick={() => handleClick(false)}>Join</IonButton>
-            </> : <span>Please allow the use of your microphone</span>}
+        <div className='outerwrap'>
+        <div className='innerwrap'>
+          {qrURL && (
+            <img
+              style={{
+                minHeight: "70%",
+                minWidth: "70%",
+              }}
+              src={qrURL}
+              alt="QR"
+            />
+          )}
           </div>
-          <div style={{ position: "absolute", bottom: 0, right: 0 }} >
-            {qrURL && <img style={{ minHeight: "200px", minWidth: "200px" }}src={qrURL} alt="QR" />}
+          <div className='innerwrap'>
+            <IonButton size="large" style={{ width: "30%", height: "30%" }} onClick={() => start()}>
+              Start
+              <IonIcon slot="end" icon={chevronForward} />
+            </IonButton>
           </div>
         </div>
       </IonContent>

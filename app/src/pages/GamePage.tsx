@@ -3,7 +3,6 @@ import {
   IonContent,
   IonHeader,
   IonCard,
-  IonCardHeader,
   IonCardTitle,
   IonCardContent,
   IonButtons,
@@ -11,175 +10,79 @@ import {
   IonPage,
   IonIcon,
   IonTitle,
-  IonProgressBar,
   IonToolbar,
   IonFooter,
 } from '@ionic/react';
-import { chevronForward, addCircleOutline, removeCircleOutline, sync } from 'ionicons/icons';
+import { chevronForward, addCircleOutline, removeCircleOutline, chevronBack } from 'ionicons/icons';
 
 import getRandomQuestion, { Question } from '../data/Questions';
 import getChildren from '../data/Player';
-import AudioData from '../components/AudioData';
+function getTimeSeed() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hour = String(now.getHours()).padStart(2, '0');
+  const minuteTens = Math.floor(now.getMinutes() / 10); // Only tens digit
 
-interface GamePageProps {
-  host: boolean,
-  id: string,
+  return `${year}-${month}-${day}-${hour}-${minuteTens}`;
 }
-function GamePage({ host, id }: GamePageProps) {
 
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const seed = useRef<string>(Date.now().toString().slice(8));
-  const joinHash = useRef<string>("");
-  const [playerNumber, setPlayerNumber] = useState<number>(AudioData.accepted ? -1 : 1);
-  const playerTracker = useRef<any>({});
-  const roundNumber = useRef<number>(1);
+function GamePage() {
+  const seed = useRef<string>(getTimeSeed());
+  const [playerNumber, setPlayerNumber] = useState<number>(0);
+  const [roundNumber, setRoundNumber] = useState<number>(1);
+  const [n1, setN1] = useState<number>(0);
+  const [n2, setN2] = useState<number>(0);
   const [question, setQuestion] = useState<Question>();
+  const tapCountRefs = [useRef(0), useRef(0)];
+  const tapTimerRefs = [useRef<NodeJS.Timeout | null>(null), useRef<NodeJS.Timeout | null>(null)];
 
   useEffect(() => {
-    console.log("GamePage mounted");
-    if (AudioData.accepted) {
-      AudioData.resetCallbacks();
-      AudioData.addCallback(onDataReceived);
-    }
-    if (host) {
-      setPlayerNumber(0);
-      roundNumber.current = 1;
-    } else {
-      joinHash.current = String(Math.floor(Math.random() * (10000 + 1))).padStart(5, '0')
-    }
-  }, []);
-  useEffect(() => {
-    setQuestion(getRandomQuestion(seed.current, playerNumber, roundNumber.current))
-  }, [seed.current, playerNumber, roundNumber.current]);
+    setQuestion(getRandomQuestion(seed.current, playerNumber, roundNumber))
+  }, [seed.current, playerNumber, roundNumber]);
 
-  useEffect(() => {
-    if (!host && joinHash.current !== '') {
-      forceSync()
+  const handleTitleTap = (idx: number) => {
+    tapCountRefs[idx].current += 1;
+    if (tapTimerRefs[idx].current) {
+      clearTimeout(tapTimerRefs[idx].current!);
     }
-  }, [joinHash]);
-
-
-  const onDataReceived = (data: string) => {
-    const pay = data.split('.')
-    console.log(`Data received: ${pay}`);
-    const head = pay.shift()
-    const action = pay.shift() || ""
-    if (head == 'h' && host) {
-      // client -> host
-      switch (action) {
-        case "s": // client Joins/sync and needs to handshake
-          onSync(pay)
-          break;
-        default:
-          console.log(`Unknown client action ${action}:${pay}`)
+    tapTimerRefs[idx].current = setTimeout(() => {
+      if (tapCountRefs[idx].current === 2) {
+        idx === 0 ? setN1((prev) => prev + 1) : setN2((prev) => prev + 1);
+      } else if (tapCountRefs[idx].current === 3 && tapCountRefs[idx].current > 0) {
+        idx === 0 ? setN1((prev) => prev - 1) : setN2((prev) => prev - 1);
       }
-    } else if (head == 'c' && !host) {
-      // host -> clients
-      switch (action) {
-        case "s": // client Joins and get response handshake
-          onAnswerJoin(pay)
-          break;
-        case "n": // next question
-          onNext(parseInt(pay[0]))
-          break;
-        default:
-          console.log(`Unknown client action ${action}:${pay}`)
-      }
-    }
-    //forceUpdate()
-  }
+      tapCountRefs[idx].current = 0;
+    }, 350);
+  };
 
-
-  // Host handlers
-  const onSync = (payload: string[]) => {
-    let playerNumber;
-    if (!Object.keys(playerTracker.current).includes(payload[0])) {
-      playerNumber = Object.keys(playerTracker.current).length + 1
-      console.log(`New player ${payload[0]} join as player ${playerNumber}`)
-      playerTracker.current[payload[0]] = playerNumber
-    } else {
-      playerNumber = playerTracker.current[payload[0]]
-      console.log(`Existing player ${payload[0]} sync as player ${playerNumber}`)
-    }
-    setTimeout(() => {
-      send(['c', 's', payload[0], payload[1], playerNumber.toString(), roundNumber.current.toString(), seed.current])
-    }, 500)
-  }
-  const goNext = () => {
-    const newRoundNumber = roundNumber.current + 1
-    console.log(`Moving to Round ${newRoundNumber}`)
-    roundNumber.current = newRoundNumber
-    if (host) {
-      send(['c', 'n', newRoundNumber.toString()])
-    }
-    forceUpdate()
-  }
-
-  const onAnswerJoin = (payload: string[]) => {
-    const receivedId = payload.shift()
-    const receivedHash = payload.shift()
-    if (receivedId === id && receivedHash === joinHash.current) {
-      console.log(`Game info ${payload}`)
-      setPlayerNumber(parseInt(payload[0]))
-      roundNumber.current = parseInt(payload[1])
-      seed.current = payload[2]
-    } else {
-      console.log(`Game info payload Received for ${receivedId} != ${id} && ${receivedHash} != ${joinHash.current}`)
-    }
-  }
-  const onNext = (newRoundNumber: number) => {
-    console.log(`Client Moving to Round ${newRoundNumber}`)
-    roundNumber.current = newRoundNumber
-    forceUpdate()
-  }
-  const forceSync = () => {
-    console.log(`Client Force sync`)
-    send(['h', 's', id, joinHash.current])
-  }
-  // Else
-  const send = (payload: string[]) => {
-    if (AudioData.accepted) {
-      const sendingText = payload.join('.')
-      console.log(`Sending ${sendingText}`)
-      AudioData.send(sendingText);
-    }
-  }
   //Render
   const renderToolbar = () => {
     return (
       <IonHeader>
         <IonToolbar className={`player-${playerNumber}`} style={{ minHeight: '70px' }}>
-          <IonTitle style={{ 'paddingLeft': '10px', 'textAlign': 'left', 'minHeight': '70px' }}>
-            Round {roundNumber.current} - {host ? "Host" : `Player ${playerNumber}`}
+          <IonTitle style={{ 'minHeight': '70px' }}>
+            Player {playerNumber + 1} - Round {roundNumber}
           </IonTitle>
-          {host &&
-            <IonButtons slot="end" style={{ 'minHeight': '70px', transform: "scale(1.2)" }}>
-              <IonButton onClick={goNext} className={`player-${playerNumber}`}>
-                Next
-                <IonIcon slot="end" icon={chevronForward}></IonIcon>
-              </IonButton>
-            </IonButtons>}
-          {!host &&
-            <IonButtons slot="end" style={{ 'minHeight': '70px', transform: "scale(1.1) translateX(-12px)" }}>
-              <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber - 1)}>
-                <IonIcon slot="end" icon={removeCircleOutline} />
-              </IonButton>
-              <span>Player Number</span>
-              <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
-                <IonIcon slot="end" icon={addCircleOutline} />
-              </IonButton>
-              <IonButton onClick={goNext} className={`player-${playerNumber}`}>
-                Next Round
-                <IonIcon slot="end" icon={chevronForward} />
-              </IonButton>
-              {AudioData.accepted && <IonButton onClick={forceSync} className={`player-${playerNumber}`}>
-                Sync
-                <IonIcon slot="end" icon={sync} />
-              </IonButton>}
-            </IonButtons>
-          }
-          {!host && playerNumber === -1 &&
-            <IonProgressBar type="indeterminate"></IonProgressBar>}
+          <IonButtons slot="start" style={{ 'minHeight': '70px', transform: "scale(1.3) translateX(20px)" }}>
+            <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(Math.max(playerNumber - 1, 0))}>
+              <IonIcon slot="start" icon={removeCircleOutline} />
+            </IonButton>
+            <span>Player Number</span>
+            <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
+              <IonIcon slot="end" icon={addCircleOutline} />
+            </IonButton>
+          </IonButtons >
+          <IonButtons slot="end" style={{ 'minHeight': '70px', transform: "scale(1.3) translateX(-20px)" }}>
+            <IonButton onClick={() => setRoundNumber(Math.max(roundNumber - 1, 1))} className={`player-${playerNumber}`}>
+              <IonIcon slot="start" icon={chevronBack} />
+            </IonButton>
+            Round
+            <IonButton onClick={() => setRoundNumber(roundNumber + 1)} className={`player-${playerNumber}`}>
+              <IonIcon slot="end" icon={chevronForward} />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
     );
@@ -205,8 +108,24 @@ function GamePage({ host, id }: GamePageProps) {
   const renderFooter = () => {
     return (
       <IonFooter style={{ minHeight: "60px" }}>
-        <IonTitle style={{ width: "50%", padding: 0, backgroundColor: "var(--background)" }} className={`player-${getChildren(playerNumber)[0]}`}><div style={{ transform: "rotate(180deg)", opacity: 0.7 }}>{question?.a1}</div><div >{question?.a1}</div></IonTitle>
-        <IonTitle style={{ width: "50%", left: "50%", padding: 0, backgroundColor: "var(--background)" }} className={`player-${getChildren(playerNumber)[1]}`}><div style={{ transform: "rotate(180deg)", opacity: 0.7 }}>{question?.a2}</div><div >{question?.a2}</div></IonTitle>
+        <IonTitle style={{ width: "50%", padding: 0, backgroundColor: "var(--background)" }} className={`player-${getChildren(playerNumber)[0]}`} onClick={() => handleTitleTap(0)}>
+          <div style={{ transform: "rotate(180deg)", opacity: 0.7 }}>
+            {question?.a1}
+          </div>
+          <div>
+            {question?.a1}
+          </div>
+          {n1 > 0 && <div className='circle-num' style={{ right: "16px" }}>{n1}</div>}
+        </IonTitle>
+        <IonTitle style={{ width: "50%", left: "50%", padding: 0, backgroundColor: "var(--background)" }} className={`player-${getChildren(playerNumber)[1]}`} onClick={() => handleTitleTap(1)}>
+          <div style={{ transform: "rotate(180deg)", opacity: 0.7 }}>
+            {question?.a2}
+          </div>
+          <div>
+            {question?.a2}
+          </div>
+          {n2 > 0 && <div className='circle-num' style={{ left: "16px" }}>{n2}</div>}
+        </IonTitle>
       </IonFooter>
     )
   }

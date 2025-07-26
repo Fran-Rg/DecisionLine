@@ -13,9 +13,9 @@ const questions = [
         "a2": "Your phone",
     },
     {
-        "q": "Getting caught",
+        "q": "Worst getting caught",
         "a1": "Masturbating",
-        "a2": "Pooping in the pool",
+        "a2": "Peeing in the pool",
     },
     {
         "q": "At which level do you consider it an adultery",
@@ -508,9 +508,9 @@ const questions = [
         "a2": "Look so sad",
     },
     {
-        "q": "Pee in the shower",
-        "a1": "More water",
-        "a2": "I have standards",
+        "q": "In the last 12 months, pee in the shower",
+        "a1": "More than 3 times",
+        "a2": "Less than 3 times",
     },
     {
         "q": "Trust to watch your kids",

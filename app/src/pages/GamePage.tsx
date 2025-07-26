@@ -91,7 +91,7 @@ function GamePage() {
                   style={{ userSelect: "none", cursor: "pointer" }}
                   onClick={handlePlayerSpanTap}
                 >
-                  Player Number
+                  Player
                 </span>
                 <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
                   <IonIcon slot="end" icon={addCircleOutline} />

@@ -85,7 +85,7 @@ function GamePage() {
             {!scoreMode ? (
               <>
                 <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(Math.max(playerNumber - 1, 0))}>
-                  <IonIcon slot="start" icon={removeCircleOutline} />
+                  <IonIcon slot="start" icon={chevronBack} />
                 </IonButton>
                 <span
                   style={{ userSelect: "none", cursor: "pointer" }}
@@ -94,7 +94,7 @@ function GamePage() {
                   Player
                 </span>
                 <IonButton className={`player-${playerNumber}`} onClick={() => setPlayerNumber(playerNumber + 1)}>
-                  <IonIcon slot="end" icon={addCircleOutline} />
+                  <IonIcon slot="end" icon={chevronForward} />
                 </IonButton>
               </>
             ) : (

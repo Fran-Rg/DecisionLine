@@ -428,7 +428,7 @@ const questions = [
         "a2": "imitating regional accents",
     },
     {
-        "q": "Whiskey",
+        "q": "Taste of whiskey",
         "a1": "Classy",
         "a2": "Shitty",
     },
@@ -454,7 +454,7 @@ const questions = [
     },
     {
         "q": "Being President",
-        "a1": "Can do",
+        "a1": "Got what it takes",
         "a2": "Impossible",
     },
     {

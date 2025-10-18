@@ -4,6 +4,7 @@ import GamePage from './GamePage';
 import { IonAlert, IonicSafeString, IonIcon } from '@ionic/react';
 import { shareOutline, ellipsisVertical } from 'ionicons/icons';
 import { renderToStaticMarkup } from 'react-dom/server'
+import LandscapePrompt from './LandscapePrompt';
 function iOS() {
   return [
     'iPad Simulator',
@@ -21,14 +22,10 @@ declare global {
 }
 const Main: React.FC = () => {
   const [gameState, setGameState] = useState<string>("");
-  const [isVertical, setIsVertical] = useState<boolean>(window.innerWidth < window.innerHeight);
   const isPWA = window.matchMedia('(display-mode: standalone)').matches
   // const isPWA = true //DEBUG
 
   useEffect(() => {
-    setInterval(() => {
-      setIsVertical(window.innerWidth < window.innerHeight);
-    }, 1000);
     console.log("Is PWA: ", isPWA)
     if (isPWA) {
       setGameState("join");
@@ -38,15 +35,6 @@ const Main: React.FC = () => {
     // setGameState("game") //DEBUG
   }, []);
 
-  if (isVertical && gameState !== "pwa") {
-    return (
-      <div style={{ textAlign: 'center', marginTop: '80%' }}>
-        <p>
-          You must use this app in landscape mode
-        </p>
-      </div>
-    )
-  }
   const exportIcon = renderToStaticMarkup(<IonIcon icon={iOS() ? shareOutline : ellipsisVertical} style={{
     minHeight: "20px",
     minWidth: "20px",
@@ -68,6 +56,10 @@ const Main: React.FC = () => {
     "join": <JoinPage start={handleStart} />,
     "game": <GamePage/>
   }
-  return states[gameState] || (<div>Loading...</div>);
+  return (
+    <LandscapePrompt>
+      { states[gameState] || (<div>Loading...</div>)}
+    </LandscapePrompt>
+  );
 };
 export default Main;

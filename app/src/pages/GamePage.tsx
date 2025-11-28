@@ -28,7 +28,11 @@ function getTimeSeed() {
   return `${year}-${month}-${day}-${hour}-${minuteTens}`;
 }
 
-function GamePage() {
+interface GamePageProps {
+  lang: string;
+}
+
+function GamePage({ lang }: GamePageProps) {
   const seed = useRef<string>(getTimeSeed());
   const [playerNumber, setPlayerNumber] = useState<number>(0);
   const [scoreNumber, setScoreNumber] = useState<number>(0);
@@ -42,9 +46,9 @@ function GamePage() {
   const playerTapCountRef = useRef(0);
   const playerTapTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-
+  console.log(`Lang in GamePage: ${lang}`);
   useEffect(() => {
-    setQuestion(getRandomQuestion(seed.current, playerNumber, roundNumber))
+    setQuestion(getRandomQuestion(seed.current, playerNumber, roundNumber, lang))
   }, [seed.current, playerNumber, roundNumber]);
 
   const handleTitleTap = (idx: number) => {

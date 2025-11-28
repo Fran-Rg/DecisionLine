@@ -22,8 +22,9 @@ declare global {
 }
 const Main: React.FC = () => {
   const [gameState, setGameState] = useState<string>("");
+  const [lang, setLang] = useState<string>("en");
   const isPWA = window.matchMedia('(display-mode: standalone)').matches
-  // const isPWA = true //DEBUG
+  // const isPWA = true // DEBUG
 
   useEffect(() => {
     console.log("Is PWA: ", isPWA)
@@ -39,10 +40,11 @@ const Main: React.FC = () => {
     minHeight: "20px",
     minWidth: "20px",
   }} />)
-  const handleStart = () => {
+  const handleStart = (lang: string) => {
     if (window.enableNoSleep) {
       window.enableNoSleep();
     }
+    setLang(lang);
     setGameState("game")
   };
   const states = {
@@ -54,7 +56,7 @@ const Main: React.FC = () => {
         onDidDismiss={() => setGameState("join")}
       />),
     "join": <JoinPage start={handleStart} />,
-    "game": <GamePage/>
+    "game": <GamePage lang={lang} />
   }
   return (
     <LandscapePrompt>
